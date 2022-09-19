@@ -100,21 +100,21 @@ jobs:
           mkdir -p ./artifact/dl
           cp -rf ./bin/ ./artifact/bin
           cp -rf ./dl/ ./artifact/dl
-	  tar -czf openwrt_firmware.tgz ./artifact/bin ./artifact/dl
+          #tar -czf openwrt_firmware.tgz ./artifact/bin ./artifact/dl
           #cp -rf $(find ./bin/targets/ -name "*.bin" -type f) ./artifact/
 
-    #- name: deliver firmware
-    #  uses: actions/upload-artifact@v2
-    #  with:
-    #      name: openwrt_firmware
-    #      path: ./artifact/
-
-    - name: Generate release tag
-      id: tag
-      run: |
-        echo "::set-output name=release_tag::openwrt_firmware_$(date +"%Y.%m.%d_%H-%M")"
-    - name: release with notes
-      uses: softprops/action-gh-release@v1
+    - name: deliver firmware
+      uses: actions/upload-artifact@v2
       with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
-        files: ./openwrt_firmware.tgz
+          name: openwrt_firmware
+          path: ./artifact/
+
+          #- name: Generate release tag
+          #  id: tag
+          #  run: |
+          #    echo "::set-output name=release_tag::openwrt_firmware_$(date +"%Y.%m.%d_%H-%M")"
+          #- name: release with notes
+          #  uses: softprops/action-gh-release@v1
+          #  with:
+          #    tag_name: ${{ steps.tag.outputs.release_tag }}
+          #    files: ./openwrt_firmware.tgz
